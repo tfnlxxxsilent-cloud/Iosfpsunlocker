@@ -1,7 +1,7 @@
 {
-  "geode": "5.5.4",
+  "geode": "v5.5.3",
   "gd": {
-    "ios": "*"
+    "ios": "2.2081"
   },
   "version": "v1.0.0",
   "id": "s1l3nt.ios_fps",
