@@ -1,5 +1,8 @@
 {
-  "geode": "3.3.0",
+  "geode": "5.5.3",
+  "gd": {
+    "ios": "*"
+  },
   "version": "v1.0.0",
   "id": "s1l3nt.ios_fps",
   "name": "iOS FPS Unlock",
