@@ -1,4 +1,4 @@
-name: Build Geode Mod (iOS)
+name: Build iOS Mod
 
 on:
   push:
@@ -13,7 +13,45 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build Geode mod for iOS
-        uses: geode-sdk/build-geode-mod@main
+      - name: Install Ninja
+        run: |
+          curl -L https://github.com/ninja-build/ninja/releases/latest/download/ninja-mac.zip -o ninja.zip
+          7z x ninja.zip -oninja
+          sudo mv ninja/ninja /usr/local/bin/ninja
+          chmod +x /usr/local/bin/ninja
+
+      - name: Download Geode CLI
+        uses: robinraju/release-downloader@v1.10
         with:
-          target: ios
+          repository: geode-sdk/cli
+          latest: true
+          fileName: "*-mac.zip"
+          out-file-path: geode-cli
+
+      - name: Extract Geode CLI
+        run: |
+          7z x geode-cli/*-mac.zip -ogeode-cli-bin
+          chmod +x geode-cli-bin/geode
+
+      - name: Setup Geode SDK
+        run: |
+          export CLI_PROFILE="$GITHUB_WORKSPACE/cli-profile"
+          ./geode-cli-bin/geode profile create GithubActions
+          ./geode-cli-bin/geode sdk install
+          ./geode-cli-bin/geode sdk update
+
+      - name: Install iOS binaries
+        run: |
+          export CLI_PROFILE="$GITHUB_WORKSPACE/cli-profile"
+          ./geode-cli-bin/geode sdk install-binaries ios
+
+      - name: Build mod for iOS
+        run: |
+          export CLI_PROFILE="$GITHUB_WORKSPACE/cli-profile"
+          ./geode-cli-bin/geode build --platform ios
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-geode-mod
+          path: build/**/*.geode
