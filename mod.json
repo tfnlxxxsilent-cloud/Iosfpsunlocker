@@ -4,15 +4,16 @@
     "ios": "2.208"
   },
   "version": "v1.0.0",
-  "id": "s1l3nt.ios_fps",
-  "name": "iOS FPS Unlock",
+  "id": "s1l3nt.ios_fpsunlocker",
+  "name": "iOS FPS Unlocker",
   "developer": "S1L3NT",
-  "description": "Custom FPS setting for iOS.",
+  "description": "Unlocks and customizes FPS on iOS Geometry Dash.",
   "settings": {
     "target-fps": {
       "name": "Target FPS",
+      "description": "Set your desired FPS limit.",
       "type": "int",
-      "default": 240
+      "default": 120
     }
   }
 }
