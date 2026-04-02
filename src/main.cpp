@@ -6,13 +6,16 @@ using namespace cocos2d;
 
 class $modify(MyCCApplication, CCApplication) {
     void setAnimationInterval(double interval) {
-        int targetFps = static_cast<int>(Mod::get()->getSettingValue<int64_t>("target-fps"));
+        auto mod = Mod::get();
+        int targetFps = static_cast<int>(mod->getSettingValue<int64_t>("target-fps"));
 
         if (targetFps > 0) {
-            CCApplication::setAnimationInterval(1.0 / static_cast<double>(targetFps));
-            log::info("Set FPS to {}", targetFps);
+            double newInterval = 1.0 / static_cast<double>(targetFps);
+            CCApplication::setAnimationInterval(newInterval);
+            log::info("FPS Unlocker applied: {} FPS", targetFps);
         } else {
             CCApplication::setAnimationInterval(interval);
+            log::info("FPS Unlocker disabled, using default interval");
         }
     }
 };
