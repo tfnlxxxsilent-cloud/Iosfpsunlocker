@@ -1,0 +1,15 @@
+{
+  "geode": "3.3.0",
+  "version": "v1.0.0",
+  "id": "s1l3nt.ios_fps",
+  "name": "iOS FPS Unlock",
+  "developer": "S1L3NT",
+  "description": "Custom FPS setting for iOS.",
+  "settings": {
+    "target-fps": {
+      "name": "Target FPS",
+      "type": "int",
+      "default": 240
+    }
+  }
+}
